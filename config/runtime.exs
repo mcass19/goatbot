@@ -14,4 +14,14 @@ if config_target() != :host do
     # A fresh one each boot, so no secret lives in the repository. It only
     # signs the LiveView session, which costs a reconnect after a reboot.
     secret_key_base: Base.encode64(:crypto.strong_rand_bytes(48))
+
+  # `ssh goatbot.local -s Elixir.BB.TUI.App` opens bb_tui. Listing subsystems
+  # replaces nerves_ssh's defaults, so SFTP is listed again; fwup is added back
+  # by nerves_ssh whenever it's missing. Here rather than in target.exs because
+  # it calls into bb_tui, which isn't compiled when target.exs is read.
+  config :nerves_ssh,
+    subsystems: [
+      :ssh_sftpd.subsystem_spec(cwd: ~c"/"),
+      BB.TUI.subsystem(Goatbot.Robot)
+    ]
 end
