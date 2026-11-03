@@ -44,11 +44,12 @@ defmodule Goatbot.IExHelpers do
   def dash, do: Goatbot.Dashboard.run()
 
   @doc """
-  Opens the bb_tui dashboard in this shell — over SSH too, where it draws
-  through the shell rather than on the device's console; `q` hands the
-  shell back. `opts` go to `BB.TUI.run/2`.
+  Opens the bb_tui dashboard, with `Goatbot.TUI`, in this shell — over SSH
+  too, where it draws through the shell rather than on the device's
+  console; `q` hands the shell back. `opts` go to `BB.TUI.run/2`.
   """
-  def tui(opts \\ []), do: BB.TUI.run(@robot, opts)
+  def tui(opts \\ []),
+    do: BB.TUI.run(@robot, Keyword.put_new(opts, :extensions, [Goatbot.TUI]))
 
   def status do
     with :ok <- running() do
