@@ -64,6 +64,10 @@ defmodule Goatbot.MixProject do
       {:toolshed, "~> 0.5.0"},
       {:breeze, "~> 0.5.1"},
 
+      # bb_tui dashboards
+      {:bb_tui, "~> 0.9"},
+      {:phoenix_ex_ratatui, "~> 0.4"},
+
       # Allow Nerves.Runtime on host to support development, testing and CI.
       # See config/host.exs for usage.
       {:nerves_runtime, "~> 0.13.12"},

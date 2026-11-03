@@ -10,5 +10,5 @@
   plugins: [Breeze.HTMLFormatter],
   # LiveView templates, formatted with Phoenix's plugin instead.
   subdirectories: ["lib/goatbot_web"],
-  import_deps: [:bb_parameter_store_cubdb, :bb, :bb_nsk, :breeze]
+  import_deps: [:bb_parameter_store_cubdb, :bb, :bb_nsk, :bb_tui, :breeze]
 ]

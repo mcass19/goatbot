@@ -53,6 +53,11 @@ defmodule Goatbot.Application do
         # The Erlang node the badge drives the robot through, named for the wifi address.
         Goatbot.Distribution,
 
+        # Lets a laptop's terminal attach to a bb_tui session running here,
+        # with `ExRatatui.Distributed.attach/3`.
+        {ExRatatui.Distributed.Listener,
+         mod: BB.TUI.App, app_opts: [robot: Goatbot.Robot, extensions: [Goatbot.TUI]]},
+
         # Advertise the name set on this robot, if any, over the one it was
         # built with. Once, at boot. See `Goatbot.Name`.
         {Task, &Goatbot.Name.apply_name/0}

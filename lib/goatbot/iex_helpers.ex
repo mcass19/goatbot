@@ -20,6 +20,7 @@ defmodule Goatbot.IExHelpers do
     IO.puts("""
     Goatbot helpers
       dash()                      full-screen dashboard (q to quit)
+      tui(opts \\\\ [])            the bb_tui dashboard in this shell (q to quit)
       status()                    state, lean, controller, gains
       go()                        arm and stand: hold it upright first
       arm() | stand() | disarm()
@@ -41,6 +42,14 @@ defmodule Goatbot.IExHelpers do
 
   @doc "Opens the full-screen `Goatbot.Dashboard`; `q` hands the shell back."
   def dash, do: Goatbot.Dashboard.run()
+
+  @doc """
+  Opens the bb_tui dashboard, with `Goatbot.TUI`, in this shell — over SSH
+  too, where it draws through the shell rather than on the device's
+  console; `q` hands the shell back. `opts` go to `BB.TUI.run/2`.
+  """
+  def tui(opts \\ []),
+    do: BB.TUI.run(@robot, Keyword.put_new(opts, :extensions, [Goatbot.TUI]))
 
   def status do
     with :ok <- running() do

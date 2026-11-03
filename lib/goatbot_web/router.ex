@@ -14,5 +14,6 @@ defmodule GoatbotWeb.Router do
     pipe_through(:browser)
 
     live("/", ControllerLive)
+    live("/tui", DashboardLive)
   end
 end
