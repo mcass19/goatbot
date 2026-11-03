@@ -2,13 +2,14 @@ import "../css/app.css"
 import "phoenix_html"
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
+import {PhoenixExRatatuiHook} from "phoenix_ex_ratatui"
 import {Stick} from "./stick"
 
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
 const liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
-  hooks: {Stick},
+  hooks: {Stick, PhoenixExRatatuiHook},
   params: {_csrf_token: csrfToken}
 })
 
